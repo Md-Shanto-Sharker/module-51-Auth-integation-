@@ -2,16 +2,39 @@ import React from "react";
 import { NavLink } from "react-router";
 
 const Navbar = () => {
+  // const  useInfo =  use(AuthContext);
+  // console.log(useInfo);
   const links = (
     <>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-red-500 underline" : ""
+          }
+          to="/"
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/login">Login</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-red-500 underline" : ""
+          }
+          to="/login"
+        >
+          Login
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/register">Register</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-red-500 underline" : ""
+          }
+          to="/register"
+        >
+          Register
+        </NavLink>
       </li>
     </>
   );
