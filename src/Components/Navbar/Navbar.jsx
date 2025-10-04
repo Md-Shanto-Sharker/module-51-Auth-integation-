@@ -44,6 +44,16 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive ? "text-red-500 underline" : ""
           }
+          to="/dashboard"
+        >
+          Dashboard
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-red-500 underline" : ""
+          }
           to="/register"
         >
           Register
