@@ -1,9 +1,20 @@
-import React from "react";
-import { NavLink } from "react-router";
+import React, { use } from "react";
+import { Link, NavLink } from "react-router";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const Navbar = () => {
-  // const  useInfo =  use(AuthContext);
-  // console.log(useInfo);
+  const { user, signOutUser } = use(AuthContext);
+  console.log(user);
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        console.log("yes deleted ");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   const links = (
     <>
       <li>
@@ -16,6 +27,7 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
+
       <li>
         <NavLink
           className={({ isActive }) =>
@@ -26,6 +38,7 @@ const Navbar = () => {
           Login
         </NavLink>
       </li>
+
       <li>
         <NavLink
           className={({ isActive }) =>
@@ -36,6 +49,31 @@ const Navbar = () => {
           Register
         </NavLink>
       </li>
+
+      {user && (
+        <>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-red-500 underline" : ""
+              }
+              to="/orders"
+            >
+              Orders
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? "text-red-500 underline" : ""
+              }
+              to="/profile"
+            >
+              Profile
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
@@ -72,7 +110,19 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        {user ? (
+          <>
+            {user.email}
+            <a onClick={handleSignOut} className="btn ml-5">
+              Sign Out
+            </a>
+          </>
+        ) : (
+          <Link to="/login" className="btn">
+            login
+          </Link>
+        )}
+        {/* <a className="btn">Button</a> */}
       </div>
     </div>
   );
